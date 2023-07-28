@@ -111,6 +111,13 @@
     responsiveImageItem(element) {
       if (element.prop("tagName") === "IMG") {
         element.addClass("img-fluid");
+        element.attr("tabindex", "0");
+        var altText = element.attr("alt");
+        var newAltText = altText
+        ? altText + " - Cliquez pour ouvrir un diaporama"
+        : "Cliquez pour ouvrir un diaporama";
+        element.attr("alt", newAltText)
+        element.attr("aria-label", newAltText);
       }
     },
     openLightBox(element, lightboxId) {
@@ -220,10 +227,10 @@
     },
     showItemTags(gallery, position, tags) {
       var tagItems =
-        '<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">Tous</span></li>';
+        '<li class="nav-item"><span class="nav-link active active-tag" tabindex="0" data-images-toggle="all">Tous</span></li>';
       $.each(tags, function(index, value) {
         tagItems += `<li class="nav-item active">
-                <span class="nav-link"  data-images-toggle="${value}">${value}</span></li>`;
+                <span class="nav-link" tabindex="0"  data-images-toggle="${value}">${value}</span></li>`;
       });
       var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`;
 
@@ -234,6 +241,7 @@
       } else {
         console.error(`Unknown tags position: ${position}`);
       }
+
     },
     filterByTag() {
       if ($(this).hasClass("active-tag")) {
