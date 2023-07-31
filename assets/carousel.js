@@ -1,93 +1,127 @@
 const carouselFiles = [
-    {
-      url: "./assets/images/slider/edward-cisneros-mariage-photo-slider-lg-unsplash.avif",
-      alt: "Photo d'un couple qui s'embrasse au cours de leur mariage"
-    },
-    {
-      url: "./assets/images/slider/nicholas-green-evenement-photo-slider-lg-unsplash.avif",
-      alt: "Photo d'une foule lors d'un événement festif"
-    },
-    {
-      url: "./assets/images/slider/ryoji-iwata-corporate-photo-slider-lg-unsplash.avif",
-      alt: "Photo d'un homme d'affaire traversant une rue"
-    }
-  ];
-  
+  {
+    url: "./assets/images/slider/ryoji-iwata-corporate-photo-slider-xl-unsplash.avif",
+    alt: "Photo d'un homme d'affaire traversant une rue"
+  },
+  {
+    url: "./assets/images/slider/nicholas-green-evenement-photo-slider-xl-unsplash.avif",
+    alt: "Photo d'une foule lors d'un événement festif"
+  },
+  {
+    url: "./assets/images/slider/edward-cisneros-mariage-photo-slider-xl-unsplash.avif",
+    alt: "Photo d'un couple qui s'embrasse au cours de leur mariage"
+  }
+];
+
 const carouselInner = document.getElementById('carousel-inner');
 const carouselIndicators = document.getElementById('carousel-indicators');
 
 
+carouselFiles.forEach((_, index) => {
+  const indicator = document.createElement('button');
+  indicator.setAttribute('type', 'button');
+  indicator.classList.add('carousel-indicator');
+  indicator.addEventListener('click', () => showSlide(index));
+  carouselIndicators.appendChild(indicator);
+});
+const indicators = document.querySelectorAll(".carousel-indicator");
 
-  carouselFiles.forEach((file, index) => {
-    // Create a slide for each image
-    const slide = document.createElement('div');
-    slide.classList.add('carousel-item');
-    if (index === 0) {
-      slide.classList.add('active');
-    }
-    const image = document.createElement('img');
-    image.src = file.url;
-    image.alt = file.alt;
-    slide.appendChild(image);
-    carouselInner.appendChild(slide);
-  
-    // Create a bullet point for each slide
-    const indicator = document.createElement('button');
-    indicator.setAttribute('type', 'button');
-    indicator.classList.add('carousel-indicator');
-    if (index === 0) {
-      indicator.classList.add('active');
-    }
-    indicator.addEventListener('click', () => showSlide(index));
-    carouselIndicators.appendChild(indicator);
+let currentSlide = 0;
+showSlide(currentSlide);
+
+function showSlide(slideIndex) {
+  const currentImage = document.createElement('img');
+  const prevImage = document.createElement('img');
+  const nextImage = document.createElement('img');
+  const numSlides = carouselFiles.length;
+
+  prevImage.src = carouselFiles[(slideIndex - 1 + numSlides) % numSlides].url;
+  nextImage.src = carouselFiles[(slideIndex + 1) % numSlides].url;
+  prevImage.alt = carouselFiles[(slideIndex - 1 + numSlides) % numSlides].alt;
+  nextImage.alt = carouselFiles[(slideIndex + 1) % numSlides].alt;
+
+  prevImage.classList.add('carousel-inner-image', 'previous');
+  currentImage.classList.add('carousel-inner-image', 'current');
+  nextImage.classList.add('carousel-inner-image', 'next');
+
+  currentImage.src = carouselFiles[slideIndex].url;
+  currentImage.alt = carouselFiles[slideIndex].alt;
+
+
+  carouselInner.appendChild(prevImage);
+  carouselInner.appendChild(currentImage);
+  carouselInner.appendChild(nextImage);
+
+  indicators.forEach((indicator) => {
+    indicator.classList.remove('active');
   });
-  
-  let currentSlide = 0;
-  function showSlide(slideIndex) {
-    const slides = document.getElementsByClassName('carousel-item');
-    const indicators = document.getElementsByClassName('carousel-indicator');
-    if (slideIndex < 0 || slideIndex >= slides.length) {
-      return;
-    }
-  
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].classList.remove('active');
-      indicators[i].classList.remove('active');
-  
-      // Set z-index to -1 for all images
-      const image = slides[i].querySelector('img');
-      image.style.zIndex = -1;
-    }
-  
-    slides[slideIndex].classList.add('active');
-    indicators[slideIndex].classList.add('active');
-  
-    // Set z-index to 1 for the active image
-    const activeImage = slides[slideIndex].querySelector('img');
-    activeImage.style.zIndex = 1;
-  
-    // Reload the image to force it to update
-    activeImage.src = carouselFiles[slideIndex].url + '?' + new Date().getTime();
-  
-    currentSlide = slideIndex;
+  indicators[slideIndex].classList.add('active');
+}
+
+function animateCarousel(slideIndex, direction) {
+  const currentImage = carouselInner.querySelector('.current');
+  const nextImage = carouselInner.querySelector('.next');
+  const prevImage = carouselInner.querySelector('.previous');
+
+  currentImage.style.transform = "translateX(0)";
+  nextImage.style.transform = "translateX(100%)";
+  prevImage.style.transform = "translateX(-100%)";
+
+  currentImage.offsetHeight;
+  nextImage.offsetHeight;
+  prevImage.offsetHeight;
+
+  currentImage.style.transition = "transform 0.3s ease-in-out";
+  if (direction === "next") {
+    currentImage.style.transform = "translateX(-100%)";
+    nextImage.style.transition = "transform 0.3s ease-in-out";
+    nextImage.style.transform = "translateX(0)";
+  } else {
+    currentImage.style.transform = "translateX(100%)";
+    prevImage.style.transition = "transform 0.3s ease-in-out";
+    prevImage.style.transform = "translateX(0)";
   }
-  
-  
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % carouselFiles.length;
-    showSlide(currentSlide);
-    console.log("next clicked");
-  }
-  
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + carouselFiles.length) % carouselFiles.length;
-    showSlide(currentSlide);
-    console.log("previous clicked");
-  }
-  
-  // Add event listeners for navigation arrows
-  const arrowLeft = document.querySelector('.arrow-left');
-  const arrowRight = document.querySelector('.arrow-right');
-  arrowLeft.addEventListener('click', prevSlide);
-  arrowRight.addEventListener('click', nextSlide);
-  
+
+  setTimeout(() => {
+    currentImage.classList.remove('current');
+    nextImage.classList.remove('next');
+    prevImage.classList.remove('previous');
+    currentImage.style.transition = "";
+    currentImage.style.transform = "";
+    nextImage.style.transition = "";
+    nextImage.style.transform = "";
+    prevImage.style.transition = "";
+    prevImage.style.transform = "";
+    showSlide(slideIndex);
+  }, 300);
+}
+
+const arrowLeft = document.querySelector('.arrow-left');
+arrowLeft.setAttribute("tabindex","0");
+arrowLeft.setAttribute("alt", "passage au diaporama de gauche");
+arrowLeft.setAttribute("aria-label", "passage au diaporama de gauche");
+const arrowRight = document.querySelector('.arrow-right');
+arrowRight.setAttribute("tabindex", "0");
+arrowRight.setAttribute("alt", "passage au diaporama de droite");
+arrowRight.setAttribute("aria-label", "passage au diaporama de droite");
+
+arrowLeft.addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + carouselFiles.length) % carouselFiles.length;
+  animateCarousel(currentSlide, "prev");
+});
+
+arrowRight.addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % carouselFiles.length;
+  animateCarousel(currentSlide, "next");
+});
+
+ 
+function nextSlide() {
+  currentSlide = (currentSlide + 1 + carouselFiles.length) % carouselFiles.length;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + carouselFiles.length) % carouselFiles.length;
+  showSlide(currentSlide);
+}

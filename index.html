@@ -32,7 +32,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Spectral:ital,wght@0,400;1,300;1,400;1,800&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
-	<!--<script src="./assets/gallery.js"></script>-->
 	<script src="./assets/scripts.js"></script>
 	<script type="application/ld+json">
 		[
@@ -217,6 +216,7 @@
 			
 			<div id="carousel" class="carousel">
 				<div class="carousel-inner" id="carousel-inner">
+					<img class="carousel-inner-image">
 					<div class="carousel-indicators" id="carousel-indicators">
 					</div>
 				</div>
@@ -242,8 +242,9 @@
 </section>
 <section id="gallery">
 	<h2 class="title">Mes travaux de photographe professionnel</h2>
-	<div class="container py-3">
-		
+	<div class="container">
+		<div class="filters"></div>
+		<div class="gallery-content"></div>
 	</div>
 	<div class="quote">
 		<figure>
@@ -319,5 +320,6 @@
 	</div>
 </section>
 <script src="./assets/carousel.js"></script>
+<script src="./assets/gallery.js"></script>
 </body>
 </html>
