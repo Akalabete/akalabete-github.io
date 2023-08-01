@@ -40,6 +40,7 @@ body {
 
 .social-link img {
 	width: 20px;
+	height: 20px;
 }
 #header {
 	height: 70%;
@@ -51,6 +52,11 @@ body {
 	position: absolute;
 	top: 35%;
 	cursor: pointer;
+}
+.arrow-left img, .arrow-right img {
+	max-height: 42px;
+	max-width:25px;
+	height: 3%;
 }
 .arrow-left {
 	left: 3%;
@@ -156,8 +162,10 @@ body {
 	z-index: 0;
 }
 
-.picture img {
+.left img {
 	width: 100%;
+	max-width: 438px;
+	max-height: 438px;
 
 }
 #about-me {
