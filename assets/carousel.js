@@ -20,6 +20,7 @@ const carouselIndicators = document.getElementById('carousel-indicators');
 carouselFiles.forEach((_, index) => {
   const indicator = document.createElement('button');
   indicator.setAttribute('type', 'button');
+  indicator.setAttribute("aria-label", "boutton du carroussel")
   indicator.classList.add('carousel-indicator');
   indicator.addEventListener('click', () => showSlide(index));
   carouselIndicators.appendChild(indicator);
