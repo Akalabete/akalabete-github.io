@@ -82,20 +82,20 @@ body {
 	padding: 0;
 }
 .arrow-left, .arrow-right {
-	position: absolute;
-	top: 35%;
-	cursor: pointer;
+    position: absolute;
+    top: 35%;
+    cursor: pointer;
+    font-size: 24px; 
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-.arrow-left img, .arrow-right img {
-	max-height: 63px;
-	max-width:38px;
-	height: 3%;
-}
+
 .arrow-left {
-	left: 3%;
+    left: 3%;
 }
+
 .arrow-right {
-	right: 3%;
+    right: 3%;
 }
 .carousel {
 	position: relative;
