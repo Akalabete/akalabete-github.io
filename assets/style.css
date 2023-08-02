@@ -197,6 +197,7 @@ body {
 
 .picture img {
 	width: 100%;
+	height: 100%;
 	max-width: 438px;
 	max-height: 438px;
 	vertical-align: middle
