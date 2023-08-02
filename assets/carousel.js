@@ -98,13 +98,8 @@ function animateCarousel(slideIndex, direction) {
 }
 
 const arrowLeft = document.querySelector('.arrow-left');
-arrowLeft.setAttribute("tabindex","0");
-arrowLeft.setAttribute("alt", "passage au diaporama de gauche");
-arrowLeft.setAttribute("aria-label", "passage au diaporama de gauche");
+
 const arrowRight = document.querySelector('.arrow-right');
-arrowRight.setAttribute("tabindex", "0");
-arrowRight.setAttribute("alt", "passage au diaporama de droite");
-arrowRight.setAttribute("aria-label", "passage au diaporama de droite");
 
 arrowLeft.addEventListener('click', () => {
   currentSlide = (currentSlide - 1 + carouselFiles.length) % carouselFiles.length;
