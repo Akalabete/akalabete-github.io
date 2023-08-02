@@ -166,7 +166,7 @@ body {
 	width: 100%;
 	max-width: 438px;
 	max-height: 438px;
-
+	vertical-align: middle
 }
 #about-me {
 	flex: 2
@@ -221,13 +221,13 @@ body {
   }
   @media screen and (max-width: 768px) {
 	.gallery-content {
-	  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+	  grid-template-columns: repeat(2, 1fr); 
 	}
   }
   
   @media screen and (max-width: 480px) {
 	.gallery-content {
-	  grid-template-columns: repeat(1, 1fr); /* 1 colonne */
+	  grid-template-columns: repeat(1, 1fr); 
 	}
   }
   .gallery-item {
