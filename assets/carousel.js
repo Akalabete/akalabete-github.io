@@ -35,9 +35,15 @@ carouselFiles.forEach((_, index) => {
   carouselIndicators.appendChild(indicator);
 });
 const indicators = document.querySelectorAll(".carousel-indicator");
-
+let intervalId;
 let currentSlide = 0;
 showSlide(currentSlide);
+startCarouselAutoScroll();
+function startCarouselAutoScroll() {
+  intervalId = setInterval(() => {
+    nextSlide();
+  }, 5000);
+}
 
 function showSlide(slideIndex) {
   const currentImage = document.createElement('img');
@@ -126,6 +132,10 @@ function animateCarousel(slideIndex, direction) {
     prevImage.style.transition = "";
     prevImage.style.transform = "";
     showSlide(slideIndex);
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    startCarouselAutoScroll();
   }, 300);
 }
 
@@ -146,7 +156,8 @@ arrowRight.addEventListener('click', () => {
  
 function nextSlide() {
   currentSlide = (currentSlide + 1 + carouselFiles.length) % carouselFiles.length;
-  showSlide(currentSlide);
+  animateCarousel(currentSlide, "next");
+  
 }
 
 function prevSlide() {
