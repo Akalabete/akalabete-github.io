@@ -1,14 +1,23 @@
 const carouselFiles = [
   {
-    url: "./assets/images/slider/ryoji-iwata-corporate-photo-slider-xl-unsplash.avif",
+    urlSmallMobile:"./assets/images/slider/ryoji-iwata-corporate-photo-slider-sm-unsplash.avif",
+    urlMobile:"./assets/images/slider/ryoji-iwata-corporate-photo-slider-md-unsplash.avif",
+    urlTablet:"./assets/images/slider/ryoji-iwata-corporate-photo-slider-lg-unsplash.avif",
+    urlDesktop: "./assets/images/slider/ryoji-iwata-corporate-photo-slider-xl-unsplash.avif",
     alt: "Photo d'un homme d'affaire traversant une rue"
   },
   {
-    url: "./assets/images/slider/nicholas-green-evenement-photo-slider-xl-unsplash.avif",
+    urlSmallMobile:"./assets/images/slider/nicholas-green-evenement-photo-slider-sm-unsplash.avif",
+    urlMobile:"./assets/images/slider/nicholas-green-evenement-photo-slider-md-unsplash.avif",
+    urlTablet:"./assets/images/slider/nicholas-green-evenement-photo-slider-lg-unsplash.avif",
+    urlDesktop: "./assets/images/slider/nicholas-green-evenement-photo-slider-xl-unsplash.avif",
     alt: "Photo d'une foule lors d'un événement festif"
   },
   {
-    url: "./assets/images/slider/edward-cisneros-mariage-photo-slider-xl-unsplash.avif",
+    urlSmallMobile:"./assets/images/slider/edward-cisneros-mariage-photo-slider-sm-unsplash.avif",
+    urlMobile:"./assets/images/slider/edward-cisneros-mariage-photo-slider-md-unsplash.avif",
+    urlTablet:"./assets/images/slider/edward-cisneros-mariage-photo-slider-lg-unsplash.avif",
+    urlDesktop: "./assets/images/slider/edward-cisneros-mariage-photo-slider-xl-unsplash.avif",
     alt: "Photo d'un couple qui s'embrasse au cours de leur mariage"
   }
 ];
@@ -35,9 +44,21 @@ function showSlide(slideIndex) {
   const prevImage = document.createElement('img');
   const nextImage = document.createElement('img');
   const numSlides = carouselFiles.length;
+  const currentImageElement = carouselInner.querySelector('.current');
+  const prevImageElement = carouselInner.querySelector('.previous');
+  const nextImageElement = carouselInner.querySelector('.next');
 
-  prevImage.src = carouselFiles[(slideIndex - 1 + numSlides) % numSlides].url;
-  nextImage.src = carouselFiles[(slideIndex + 1) % numSlides].url;
+  if (currentImageElement) {
+    carouselInner.removeChild(currentImageElement);
+  }
+  if (prevImageElement) {
+    carouselInner.removeChild(prevImageElement);
+  }
+  if (nextImageElement) {
+    carouselInner.removeChild(nextImageElement);
+  }
+  prevImage.src = getCorrectImageUrl(carouselFiles[(slideIndex - 1 + numSlides) % numSlides]);
+  nextImage.src = getCorrectImageUrl(carouselFiles[(slideIndex + 1) % numSlides]);
   prevImage.alt = carouselFiles[(slideIndex - 1 + numSlides) % numSlides].alt;
   nextImage.alt = carouselFiles[(slideIndex + 1) % numSlides].alt;
 
@@ -45,7 +66,7 @@ function showSlide(slideIndex) {
   currentImage.classList.add('carousel-inner-image', 'current');
   nextImage.classList.add('carousel-inner-image', 'next');
 
-  currentImage.src = carouselFiles[slideIndex].url;
+  currentImage.src = getCorrectImageUrl(carouselFiles[slideIndex]);
   currentImage.alt = carouselFiles[slideIndex].alt;
 
 
@@ -58,7 +79,18 @@ function showSlide(slideIndex) {
   });
   indicators[slideIndex].classList.add('active');
 }
-
+function getCorrectImageUrl(slide) {
+  const screenWidth = window.innerWidth;
+  if (screenWidth >= 1024) {
+    return slide.urlDesktop;
+  } else if (screenWidth >= 768) {
+    return slide.urlTablet;
+  } else if (screenWidth >= 480) {
+    return slide.urlMobile;
+  } else {
+    return slide.urlSmallMobile;
+  }
+}
 function animateCarousel(slideIndex, direction) {
   const currentImage = carouselInner.querySelector('.current');
   const nextImage = carouselInner.querySelector('.next');
