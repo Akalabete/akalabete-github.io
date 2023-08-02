@@ -81,7 +81,7 @@ function showSlide(slideIndex) {
 }
 function getCorrectImageUrl(slide) {
   const screenWidth = window.innerWidth;
-  if (screenWidth >= 1024) {
+  if (screenWidth >= 1280) {
     return slide.urlDesktop;
   } else if (screenWidth >= 768) {
     return slide.urlTablet;
