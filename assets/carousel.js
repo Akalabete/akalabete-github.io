@@ -29,7 +29,7 @@ const carouselIndicators = document.getElementById('carousel-indicators');
 carouselFiles.forEach((_, index) => {
   const indicator = document.createElement('button');
   indicator.setAttribute('type', 'button');
-  indicator.setAttribute("aria-label", "boutton du carroussel")
+  indicator.setAttribute("aria-label", "boutton indicateurs du carroussel")
   indicator.classList.add('carousel-indicator');
   indicator.addEventListener('click', () => showSlide(index));
   carouselIndicators.appendChild(indicator);
@@ -140,8 +140,13 @@ function animateCarousel(slideIndex, direction) {
 }
 
 const arrowLeft = document.querySelector('.arrow-left');
+arrowLeft.setAttribute("aria-label", "flèche de navigation du slider précédent")
+arrowLeft.setAttribute("tabindex", "0");
 
 const arrowRight = document.querySelector('.arrow-right');
+arrowRight.setAttribute("aria-label", "flèche de navigation du slider suivant")
+arrowright.setAttribute("tabindex", "0");
+
 
 arrowLeft.addEventListener('click', () => {
   currentSlide = (currentSlide - 1 + carouselFiles.length) % carouselFiles.length;
