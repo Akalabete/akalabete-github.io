@@ -52,7 +52,7 @@ const galleryData = {
 
 
 const categories = ["Tous", ...Object.keys(galleryData)];
-const galleryContainer = document.querySelector(".filters");
+const galleryBtnContainer = document.querySelector(".filters");
 let activeIndex = 0;
 for (let i = 0; i < categories.length; i++) {
   const galleryBtn = document.createElement("button");
@@ -67,7 +67,7 @@ for (let i = 0; i < categories.length; i++) {
       setActiveButton(index);
     };
   })(i));
-  galleryContainer.appendChild(galleryBtn);
+  galleryBtnContainer.appendChild(galleryBtn);
   if (i === 0){
     galleryBtn.classList.add("active");
   }
@@ -132,8 +132,6 @@ function getUrls(galleryCategory) {
 }
 function printPic(allUrls, allAlts) {
   const galleryContainer = document.querySelector(".gallery");
-  
-  
   const existingGalleryContent = document.querySelector(".gallery-content");
   if (existingGalleryContent) {
       existingGalleryContent.remove();
