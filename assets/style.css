@@ -85,8 +85,10 @@ body {
     position: absolute;
     top: 35%;
     cursor: pointer;
-    font-size: 24px; 
+    font-size: 40px; 
 	color: white;
+	opacity: 0.5;
+	transform: scaleY(2.5);
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
