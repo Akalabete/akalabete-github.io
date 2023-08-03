@@ -50,7 +50,7 @@ const galleryData = {
         
 }
 
-const galleryContent = document.querySelector(".gallery-content");
+
 const categories = ["Tous", ...Object.keys(galleryData)];
 const galleryContainer = document.querySelector(".filters");
 let activeIndex = 0;
@@ -133,7 +133,7 @@ function getUrls(galleryCategory) {
 function printPic(allUrls, allAlts) {
   const galleryContainer = document.querySelector(".gallery");
   
-  // Supprimer l'élément .gallery-content s'il existe déjà
+  
   const existingGalleryContent = document.querySelector(".gallery-content");
   if (existingGalleryContent) {
       existingGalleryContent.remove();
