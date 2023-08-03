@@ -97,6 +97,7 @@ function showGallerySpec(index) {
         printPic(categoryData.urls, categoryData.alts);
         break;
     }
+    
 }
 function getAllUrls(galleryData) {
     const allUrls = [];
@@ -129,18 +130,27 @@ function getUrls(galleryCategory) {
   
     return { urls: allUrls, alts: allAlts };
 }
-  
-  
-
 function printPic(allUrls, allAlts) {
-    galleryContent.innerHTML = "";
-    for (let i = 0; i < allUrls.length; i++) {
-        const item = document.createElement("img");
-        item.setAttribute("tabindex", "0");
-        item.setAttribute("aria-label", allAlts[i]);
-        item.classList.add("gallery-item")
-        item.src = allUrls[i];
-        item.alt = allAlts[i];
-        galleryContent.appendChild(item);
-    }
+  const galleryContainer = document.querySelector(".gallery");
+  
+  // Supprimer l'élément .gallery-content s'il existe déjà
+  const existingGalleryContent = document.querySelector(".gallery-content");
+  if (existingGalleryContent) {
+      existingGalleryContent.remove();
+  }
+
+  const galleryContent = document.createElement("div");
+  galleryContent.classList.add("gallery-content");
+  galleryContainer.appendChild(galleryContent);    
+  for (let i = 0; i < allUrls.length; i++) {
+      const item = document.createElement("img");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("aria-label", allAlts[i]);
+      item.classList.add("gallery-item")
+      item.src = allUrls[i];
+      item.alt = allAlts[i];
+      galleryContent.appendChild(item);
+  }
 }
+
+
