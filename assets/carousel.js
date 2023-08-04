@@ -145,7 +145,7 @@ arrowLeft.setAttribute("tabindex", "0");
 
 const arrowRight = document.querySelector('.arrow-right');
 arrowRight.setAttribute("aria-label", "flèche de navigation du slider suivant")
-arrowright.setAttribute("tabindex", "0");
+arrowRight.setAttribute("tabindex", "0");
 
 
 arrowLeft.addEventListener('click', () => {

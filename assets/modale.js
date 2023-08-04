@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateModalImage();
     });
 
-    // Écouteur d'événement pour le bouton de fermeture
+    
     modalCloseBtn.addEventListener("click", () => {
         modal.style.display = "none";
     });
